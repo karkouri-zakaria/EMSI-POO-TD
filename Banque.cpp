@@ -7,13 +7,15 @@ using namespace std;
 
 int main()
 {
-	Compte* E = new Compte(2354, "Ahmed", 1000.0);
+    Compte* E = new Compte(2354, "Ahmed", 1000.0);
 	Compte* E2 = new Compte(3456, "Ali", 1000.0);
-	E->retirerArgent(500);
+    E->retirerArgent(500);
 	E->desposerArgent(800);
-	E->transfererArgent(600, E2);
+	E->transfererArgent(600,E2);
 	E->consulterSolde();
 	E2->consulterSolde();
+	delete E;
+	delete E2;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
