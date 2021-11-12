@@ -9,16 +9,15 @@ private:
 	const double pi = 3.1415 ;
 	
 public:
-	Cercle();
+	//Cercle();
 	Cercle(Point c, double R);
-	void Affiche();
+	void Affiche() const;
 	void changR(double R);
-	void TransC(Point c);
-	double Surface();
-	double Perimetre();
-	bool Egal(Cercle C2);
-	bool Appar(Point a);
+	void TransC(double dx,double dy);
+	double Surface()const;
+	double Perimetre()const;
+	bool Egal(const Cercle &C2)const;
+	bool Appar(const Point &a) const;
 
 
 };
-
