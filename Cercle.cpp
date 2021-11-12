@@ -2,19 +2,19 @@
 #include "Cercle.h"
 using namespace std; 
 
-Cercle::Cercle()
+/*Cercle::Cercle()
 {
-	this->c = Point();
+	this->c = Point::Origin();
 	this->R = 0;
-}
+}*/
 
 Cercle::Cercle(Point c, double R)
 {
-	this->c = Point(c);
+	this->c = c;
 	this->R = R;
 }
 
-void Cercle::Affiche()
+void Cercle::Affiche() const
 {
 	cout << "("; this->c.Afficher(); cout << "," << this->R << ")\n";
 }
@@ -24,38 +24,31 @@ void Cercle::changR(double R)
 	this->R = R;
 }
 
-void Cercle::TransC(Point c)
+void Cercle::TransC(double dx, double dy)
 {
-	this->c = c;
+	this->c.translate(dx, dy);
 }
 
-double Cercle::Surface()
+double Cercle::Surface() const
 {
-	cout << pi * pow(this->R, 2) << endl;
 	return pi*pow(this->R,2);
 }
 
-double Cercle::Perimetre()
+double Cercle::Perimetre() const
 {
-	cout << pi * this->R * 2 << endl;
 	return pi * this->R * 2;
 }
 
-bool Cercle::Egal(Cercle C2)
+bool Cercle::Egal(const Cercle &C2) const
 {
 	bool res;
-	if (this->c.Distance(C2.c) == 0 and this->R == C2.R) { res= true;}
-	else { res= false; }
-	cout << res << endl;
-	return res;
+	if (this->c.Distance(C2.c) == 0 and this->R == C2.R) { return true;}
+	else { return false; }
 }
 
-bool Cercle::Appar(Point a)
+bool Cercle::Appar(const Point &a) const
 {
 	bool res;
-	if (this->c.Distance(a) == this->R) { res = true; }
-	else { res = false; }
-	cout << res << endl;
-	return res;
+	if (this->c.Distance(a) == this->R) { return true; }
+	else { return false; }
 }
-
