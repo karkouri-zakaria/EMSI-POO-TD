@@ -4,13 +4,12 @@ class Point
 private:
 	double x;
 	double y;
+	Point();
 
 public:
-	Point();
 	Point(double x, double y);
-	void Afficher();
-	double Distance(Point z2);
-	static Point Reff();
-	static Point addPoint(double x, double y);
+	void Afficher() const;
+	double Distance( const Point &z2) const;
+	void translate(double dx, double dy);
+	static Point Origine();
 };
-
