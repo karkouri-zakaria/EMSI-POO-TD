@@ -4,7 +4,7 @@ class Complex
 private:
 	double x;
 	double y;
-	double* Polaire;
+	double* Polaire; //(module,argument)
 	const double pi = 3.1615;
 	static int NoCom;
 public:
