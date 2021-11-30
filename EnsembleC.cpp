@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "Complex.h"
+#include "NewComplex.h"
 using namespace std;
 
 int main()
