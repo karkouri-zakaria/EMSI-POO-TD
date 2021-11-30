@@ -12,4 +12,5 @@ int main()
 	C3.Afficher();
 	C4.AfficherPol();
 	cout << C1.operator==(C2);
+}
 
