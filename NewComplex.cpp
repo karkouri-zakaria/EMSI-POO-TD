@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-#include "Complex.h"
+#include "NewComplex.h"
 #include"math.h"
 
 int Complex::NoCom = 0;
