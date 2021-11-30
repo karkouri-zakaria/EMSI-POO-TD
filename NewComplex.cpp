@@ -20,7 +20,7 @@ Complex::Complex(double x, double y)
 	this->y = y;
 	this->Polaire = new(double[2]);
 	this->Polaire[0] = sqrt(pow(this->x, 2) + pow(this->y, 2));
-	this->Polaire[1] = (atan(this->y / this->x)*180/pi);
+	this->Polaire[1] = (atan(this->y / this->x)*180/pi); //degré
 }
 
 Complex::~Complex()
