@@ -35,6 +35,8 @@ Complex::Complex(const Complex& z)
 	this->x = z.x;
 	this->y = z.y;
 	this->Polaire = new(double[2]);
+        //this->Polaire[0] = z.Polaire[0];
+        //this->Polaire[1] =z.Polaire[1];
 	for (size_t i = 0; i < 2; i++)
 	{
 		this->Polaire[i] = z.Polaire[i];
@@ -49,6 +51,8 @@ Complex Complex::operator=(const Complex& z)
 		delete[] this->Polaire;
 		this->Polaire = nullptr;
 		this->Polaire = new(double[2]);
+		//this->Polaire[0] = z.Polaire[0];
+                //this->Polaire[1] =z.Polaire[1];
 		for (size_t i = 0; i < 2; i++)
 		{
 			this->Polaire[i] = z.Polaire[i];
