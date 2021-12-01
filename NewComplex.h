@@ -7,9 +7,11 @@ private:
 	double* Polaire; //(module,argument)
 	const double pi = 3.1615;
 	static int NoCom;
-public:
 	Complex();
 	Complex(double x,double y);
+public:
+	Complex* Create();
+	Complex* Create(double x,double y);
 	~Complex();
 	Complex(const Complex& z);
 	Complex operator=(const Complex& z);
