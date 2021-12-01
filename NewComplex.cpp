@@ -23,6 +23,18 @@ Complex::Complex(double x, double y)
 	this->Polaire[1] = (atan(this->y / this->x)*180/pi); //degré
 }
 
+Complex* Complex::Create()
+{
+	Complex* P = new Complex();
+	return P;
+}
+
+Complex* Complex::Create(double x, double y)
+{
+	 Complex* P = new Complex(1, 2);
+	 return P;
+}
+
 Complex::~Complex()
 {
 	delete[] Polaire;
