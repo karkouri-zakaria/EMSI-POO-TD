@@ -17,7 +17,7 @@ DateH::DateH(int h = 0, int min = 0, int sec = 0, int D = 1, int M = 1, int Y = 
 	if (!(1899 < Y && Y < 2501)) { this->Y = 1900; };
 }
 
-void DateH::Show() const
+void DateH::affiche() const
 {
 	if (this->D < 10) { std::cout << "0"; }
 	std::cout << this->D << "/";
