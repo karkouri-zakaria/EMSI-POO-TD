@@ -24,22 +24,17 @@ void DateH::affiche() const
 	if (this->M < 10) { std::cout << "0"; }
 	std::cout << this->M << "/";
 	std::cout << this->Y << " ";
-	this->affiche();
+	Heure::affiche();
 }
 
 bool DateH::operator>(const DateH& Dt) const
 {
-	if (this->Y<=Dt.Y){
-		if (this->M <= Dt.M) {
-			if (this->D <= Dt.D) {
-				if (this->h <= Dt.h) {
-					if (this->min <= Dt.min) {
-						if (this->sec <= Dt.sec) {
-							return false;
-						}
-					}
-				}
-			}
-		}
-	} return true;
+	bool res = true;
+	res = (this->Y > Dt.Y) ? true : false;
+	res = (this->M > Dt.M) ? true : false;
+	res = (this->D > Dt.D) ? true : false;
+	res = this->convertTOsec() > Dt.convertTOsec();
+
+	return res;
 }
+
