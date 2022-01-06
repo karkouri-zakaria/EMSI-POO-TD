@@ -23,7 +23,6 @@ void DateH::affiche() const
 	std::cout << this->D << "/";
 	if (this->M < 10) { std::cout << "0"; }
 	std::cout << this->M << "/";
-	if (this->Y < 10) { std::cout << "0"; }
 	std::cout << this->Y << " ";
 	this->affiche();
 }
