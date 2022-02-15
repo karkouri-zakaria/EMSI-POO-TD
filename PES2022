@@ -1,0 +1,369 @@
+#include<iostream>
+using namespace std;
+//----------------------------Employe----------------------------------.h
+class Employe{
+private:
+    string nom;
+    const int mat;
+    double i_s;
+    static float v_a;
+    static int cpt;
+
+public:
+    Employe();
+    Employe(string nom, double i_s);
+    virtual double salaire() const;
+    virtual void affiche();
+    virtual~Employe()
+};
+//--------------------------------------------------------------.cpp
+int Employe::cpt=0;
+float Employe::v_a=500;
+
+Employe::Employe(string nom,double i_s):mat(++Employe::cpt) {
+    this->nom=nom;
+    this->i_s=i_s;
+}
+Employe::Employe():mat(++Employe::cpt){
+    this->nom="None";
+    this->i_s=NULL;
+}
+double Employe::salaire() const {
+    return(this->i_s*Employe::v_a);
+}
+void Employe::affiche() const
+{
+    std::cout << "nom : " << this->nom << std::endl; 
+    std::cout << " matricule: " << this->matricule << std::endl;
+    std::cout << "indice : " << this->i_s << std::endl;
+    std::cout << " augmentation: " <<Employe::v_a<< std::endl;
+}
+Employe::~Employe(){}
+//----------------------------Responsable----------------------------------.h
+#include<vector>
+class Responsable : public Employe{
+private:
+    vector<Employe*> subord;
+public:
+    Responsable(string nom, float i_s);
+    void affiche const override;
+    void add_subord(Employe*);
+    ~Responsable();
+};
+//--------------------------------------------------------------.cpp
+Responsable::Responsable(string nom, float i_s) : Employe(nom,i_s){
+    this->subord = vector<Employe*>();
+}
+
+void Responsable::affiche(){
+    this->Employe::affiche();
+    for (int i=0 ; i<this->subord.size() ; i++){
+        this->subord[i]->afficher();
+    }
+}
+
+void Responsable::add_subord(Employe* E){
+    this->subord.push_back(E);
+}
+
+Responsable::~Responsable(){
+    this->subord.clear;
+}
+//------------------------------Commercial--------------------------------.h
+class Commercial : public Employe{
+private:
+    int N_ventes;
+public:
+    Commercial(string nom, float i_s, int N_ventes);
+    double salaire() const override;
+    ~Commercial;
+}
+//--------------------------------------------------------------.cpp
+Commercial::Commercial(string nom, float i_s, int N_ventes):Employe(nom,i_s){
+    this->N_ventes=N_ventes;
+}
+double Commercial::salaire()const{
+    return(this->Employe::salaire()+this->N_ventes/100)
+}
+
+Commercial::~Commercial(){}
+//-------------------------------Staff-------------------------------.h
+class Staff{
+private:
+    vector<Employe*> personnel;
+public:
+    Staff();
+    double somme_salaire() const;
+    void add_employe(Employe*);
+    ~Staff();
+}
+//--------------------------------------------------------------.cpp
+Staff::Staff(){
+    this->personnel = vector<Employe*>();
+}
+
+double Staff::somme_salaire() const{
+    double a = 0;
+    for (int i = 0; i < this->personnel.size(); i++){
+        a += this->personnel[i]->salaire();
+    }
+    return a;
+}
+
+void Staff::add_employe(Empoye* E){
+    this->personnel.push_back(E);
+}
+
+Staff::~Staff(){
+    for (int i = 0; i < this->personnel.size(); i++)
+    {
+        delete this->personnel[i];
+        this->personnel[i] = 0;
+    }
+    this->personnel.clear();
+}
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//------------------------------Node--------------------------------.h
+typedef int T;
+class Node{
+private:
+    T data;
+    Node* next;
+public:
+    Node(T data)
+    void affiche() const;
+    ~Node();
+}
+//--------------------------------------------------------------.cpp
+Node::Node(T data){
+    this->data = data;
+    this->next = nullptr;
+}
+
+void Node::affiche() const{
+    std::cout << this->data << std::endl;
+}
+
+Node::~Node(){}
+//------------------------------ Stack--------------------------------.h
+class Stack(){
+private:
+    Node* top;
+public:
+    Stack();
+    void push(Node*); 
+    Node* pop(); 
+    bool is_empty() const; 
+    void print() const; 
+    void print_stack();
+    Node* sommet() const;
+    ~Stack();
+}
+//--------------------------------------------------------------.cpp
+Stack::Stack(){
+    this->top = nullptr;
+}
+
+void Stack::push(Node* n){
+    n->next = this->top;
+    this->top = n;
+}
+
+Node* Stack::pop(){
+    Node* tmp = this->top;
+    this->top = this->top->next;
+    delete tmp
+    return(tmp)
+}
+
+bool Stack::is_empty() const{
+    return (this->top==nullptr);
+}
+
+void Stack::print_stack() {
+    Node* tmp = this->top;
+    Stack tmpstack;
+    while (tmp != nullptr){
+        tmp->affiche();
+        this->pop();
+        tmpstack.push(tmp);
+        tmp = this->top;
+    }
+    *this=tmpstack;
+}
+
+Node* Stack::sommet() const{
+	return this->top;
+}
+
+Stack::~Stack(){
+	while (!this->is_empty()){
+		this->pop();
+	}
+}
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//-------------------------------Vecteur-------------------------------.h
+typedef float L;
+class Vecteur{
+private:
+    L* vect;
+public:
+    Vecteur(float x=0.0, float y=0.0, float z=0.0);
+    Vecteur(const Vecteur&); 
+    void affiche() const;
+    Vecteur& operator=(const Vecteur&);
+    bool operator==(const Vecteur&)const; 
+    Vecteur &operator+(const Vecteur&)const;
+    float operator*(const Vecteur&) const;
+    bool operator!=(const Vecteur&)const;
+    float& operator[](int)  ; //?
+    ~Vecteur();
+}
+//--------------------------------------------------------------.cpp
+Vecteur::Vecteur(float x,float y, float z){
+    this->vect=new float[3];
+    this->vect[0] = x;
+    this->vect[1] = y;
+    this->vect[2] = z;
+}
+
+Vecteur::Vecteur(const Vecteur& v){
+    this->vect=new float[3];
+    this->vect[1] = v.vect[0];
+    this->vect[2] = v.vect[1];
+    this->vect[3] = v.vect[2];
+}
+
+void Vecteur::affiche() const{
+    cout << "(" << this->vect[0] << "," << this->vect[1] << "," << this->vect[2] << ")" << endl;
+}
+
+Vecteur& Vecteur::operator=(const Vecteur& v){
+    if(this!=&v){
+        delete[] this->vect;
+        this->vect=nullptr;
+        this->vect=new float[3];
+        for (int i = 0; i < 3; i++){
+            this->vect[i]=v.vect[i];
+        }
+    }
+    return *this;
+}
+
+bool Vecteur::operator==(const Vecteur& v) const{
+    bool res = true; 
+    for (int i = 0; i < 3; i++){
+        res = res && (this->vect[i] == v.vect[i]);
+    }
+    return res;
+}
+
+bool Vecteur::operator!=(const Vecteur& v) const{
+    return !(this->operator==(v));
+}
+
+Vecteur& Vecteur::operator+(const Vecteur& v) const{
+    Vecteur *V=new Vecteur();
+    for (int i = 0; i < 3; i++){
+        V->vect[i] = this->vect[i] + v.vect[i];
+    }
+	return *V;
+ }
+
+float Vecteur::operator*(const Vecteur& v) const{
+	float s = 0; 
+	for (int i = 0; i < 3; i++){
+        s += this->vect[i] * v.vect[i];
+	}
+	return s;
+}
+
+float& Vecteur::operator[](int i){
+    assert(index >= 0 && index < 3);
+    return(this->vect[i])
+}
+
+Vecteur::~Vecteur(){
+    delete[] this->vect; 
+    this->vect = nullptr;
+}
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//-------------------------------Matrice-------------------------------.h
+class Matrix{
+private: 
+    int L, C; 
+    int** Mat;
+public: 
+    Matrix(int L=0, int C=0); 
+    void remplissage(); 
+    Matrix& operator+(const Matrix&) const;
+    Matrix& operator*(const Matrix&) const;
+    void affiche() const; 
+    ~Matrix();
+};
+//--------------------------------------------------------------.cpp
+Matrix::Matrix(int L,int C){
+    this->L=L;
+    this->C=C;
+    this->Mat=new(int*[this->L]);
+    for (int i = 0; i < this->L; i++){
+        this->Mat[i]=new(int[this->C]);
+    }
+}
+
+void Matrix::remplissage(){
+	for (int i = 0; i < this->L; i++){
+		for (int j = 0; j < this->C; j++){
+		std::cout << "Mat[" << i << "," << j << "] = ?" << std::endl;
+		std::cin >> this->Mat[i][j];
+		}
+	}
+}
+
+Matrix& Matrix::operator+(const Matrix& M) const{
+    Matrix* res = new Matrix(this->L, this->C);
+    for (int i = 0; i < this->L; i++) {
+        for (int j = 0; j < this->C; j++){
+            res->Mat[i][j] = this->Mat[i][j] + M.Mat[i][j];
+        }
+    }
+    return *res;
+}
+
+Matrix& Matrix::operator*(const Matrix& M) const{
+	assert(this->L == M.C);
+	Matrix* res = new Matrix(this->L, M.C);
+	for (int i = 0; i < this->L; i++){
+		for (int j = 0; j < M.C; j++){
+			res->Mat[i][j] = 0;
+			for (int k = 0; k < M.C; k++){
+				res->Mat[i][j] += this->Mat[i][k] * M.Mat[k][j];
+			}
+		}
+	}
+    return *res;
+}
+
+void Matrix::affiche() const{
+	for (int i = 0; i < this->L; i++){
+		for (int j = 0; j < this->C; j++){
+			std::cout<< this->Mat[i][j]<<"  ";
+		}
+		std::cout << std::endl;
+	}
+}
+
+Matrix::~Matrix(){
+	for (int i = 0; i < this->L; i++){
+		delete[] this->Mat[i];
+		this->Mat[i] = nullptr;
+	}
+	delete[]	this->Mat; 
+	this->Mat = 0;
+}
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//-------------------------------Compte-------------------------------.h
