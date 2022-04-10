@@ -8,7 +8,7 @@ using namespace std;
 
 int main() {
 
-    // Instanciation d'une Liste_C chainée Liste_C
+    // Instanciation d'une Liste_C chainÃ©e Liste_C
     Liste_C <int> Liste_C;
 
     // Insertion de six noeuds dans la Liste_C
@@ -42,6 +42,7 @@ int main() {
     cout << '\n';
 
     // Afficher la Liste_C apres la suppression
+    Liste_C.afficher();
     cout << "Nombre de noeuds dans la Liste_C: " << Liste_C.taille();
     
     return 0   
